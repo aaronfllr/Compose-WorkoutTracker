@@ -48,10 +48,12 @@ class MainActivity : ComponentActivity() {
                     ) {
                         OutlinedTextField(
                             value = exerciseName,
+                            label = { Text(text = "Exercise")},
                             onValueChange = { text ->
                                 exerciseName = text
                             },
                             modifier = Modifier.weight(1f)
+
                         )
                         Spacer(modifier = Modifier.width(16.dp))
                         Button(onClick = {
@@ -62,7 +64,7 @@ class MainActivity : ComponentActivity() {
                         }) {
                             Text(text = "Add")
                         }
-                    }
+                     }
                     ExerciseList(exerciseNames = exerciseNames)
                 }
             }
