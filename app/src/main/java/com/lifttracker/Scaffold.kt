@@ -125,7 +125,7 @@ fun centerScaffoldExamplePreview() {
                 .padding(innerPadding)
 
         ) {
-            ExerciseList(exerciseNames = listOf("asdlfk", "sldkfj"))
+            ExerciseList(exerciseNames = exerciseNames /*("asdlfk", "sldkfj")*/)
 
         }
 
