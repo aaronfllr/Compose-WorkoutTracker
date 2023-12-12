@@ -36,16 +36,18 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview(showBackground = true)
 @Composable
-fun centerScaffoldExamplePreview() {
+fun centerScaffoldExamplePreview(viewModel: AddExercise = viewModel()) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(
         rememberTopAppBarState())
-    var exerciseNames by remember {
+    var text by remember {
         mutableStateOf(listOf<String>())
     }
     var showDialog by remember { mutableStateOf((false))}
@@ -87,14 +89,6 @@ fun centerScaffoldExamplePreview() {
             )
         },
 
-//    ) {
-//        innerPadding ->
-//        Column(
-//            modifier = Modifier
-//                .padding(innerPadding),
-//            verticalArrangement = Arrangement.spacedBy(16.dp)
-//        )
-//    }
         floatingActionButton = {
             FloatingActionButton(
                 onClick = { showDialog = true }
@@ -125,9 +119,11 @@ fun centerScaffoldExamplePreview() {
                 .padding(innerPadding)
 
         ) {
-            ExerciseList(exerciseNames = exerciseNames /*("asdlfk", "sldkfj")*/)
-
+            ExerciseList(exerciseNames = listOf("asdlfk", "sldkfj", "Squat"))
+//            ExerciseList(exerciseNames = viewModel.exerciseNames)
+//            Text(text = viewModel.exerciseNames[0])
         }
+
 
     }
 }

@@ -19,17 +19,17 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 
 @Composable
-fun DialogAddExercise(onDismiss: () -> Unit): List<String> {
+fun DialogAddExercise(onDismiss: () -> Unit, viewModel: AddExercise = viewModel()) {
     var exerciseName: String by remember {
         mutableStateOf("")
     }
-    var exerciseNames by remember {
-        mutableStateOf(listOf<String>())
-    }
+
     Dialog(
         onDismissRequest = { onDismiss() }
     ) {
@@ -54,7 +54,8 @@ fun DialogAddExercise(onDismiss: () -> Unit): List<String> {
                 Button(
                     onClick = {
                         if (exerciseName.isNotBlank()) {
-                            exerciseNames = exerciseNames + exerciseName
+                            viewModel.addToList(exerciseName)
+                            
                             exerciseName = ""
                         }
                     }
@@ -64,5 +65,17 @@ fun DialogAddExercise(onDismiss: () -> Unit): List<String> {
             }
         }
     }
-    return exerciseNames
+
+
+}
+
+class AddExercise : ViewModel() {
+
+    var exerciseNames = mutableListOf<String>()
+
+    fun addToList(exercise: String) {
+
+            exerciseNames.add(exercise)
+
+    }
 }
